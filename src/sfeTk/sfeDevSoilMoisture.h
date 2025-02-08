@@ -43,6 +43,11 @@ class sfeDevSoilMoisture
     /// @return The moisture value - a resistance reading between 0 and 1023
     uint16_t readMoistureValue(void);
 
+    /// @brief Changes the I2C address of the sensor
+    /// @param newAddress The new I2C address to assign to the sensor
+    /// @return kSTkErrOk if successful, otherwise an error code
+    sfeTkError_t changeSensorAddress(uint8_t newAddress);
+
   protected:
     // The I2C bus the sensor is connected to
     sfeTkII2C *_theBus;

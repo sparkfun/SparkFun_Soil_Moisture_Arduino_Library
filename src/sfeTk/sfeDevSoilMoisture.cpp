@@ -72,3 +72,17 @@ uint16_t sfeDevSoilMoisture::readMoistureValue(void)
 
     return value;
 }
+
+//----------------------------------------------------------------------------------------
+sfeTkError_t sfeDevSoilMoisture::changeSensorAddress(uint8_t newAddress)
+{
+    if (_theBus == nullptr)
+        return kSTkErrFail;
+
+    // Validate the new address
+    if (newAddress < 0x07 || newAddress > 0x78)
+        return kSTkErrFail;
+
+    // Send the command to change the address
+    return _theBus->writeRegisterByte(kCommandChangeAddress, newAddress);
+}

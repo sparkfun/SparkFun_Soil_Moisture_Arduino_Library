@@ -5,9 +5,9 @@
 
 Arduino Library for the SparkFun Qwiic Soil Moisture Sensor
 
-![Release](https://img.shields.io/github/v/release/sparkfun//SparkFun_Soil_Moisture_Arduino_Library)
-![Release Date](https://img.shields.io/github/release-date/sparkfun//SparkFun_Soil_Moisture_Arduino_Library?display_date=published_at)
 ![License](https://img.shields.io/github/license/sparkfun/SparkFun_Soil_Moisture_Arduino_Library)
+![Release](https://img.shields.io/github/v/release/sparkfun/SparkFun_Soil_Moisture_Arduino_Library)
+![Release Date](https://img.shields.io/github/release-date/sparkfun/SparkFun_Soil_Moisture_Arduino_Library)
 ![Documentation - build](https://img.shields.io/github/actions/workflow/status/sparkfun/SparkFun_Soil_Moisture_Arduino_Library/build-deploy-ghpages.yml)
 ![GitHub issues](https://img.shields.io/github/issues/sparkfun/SparkFun_Soil_Moisture_Arduino_Library)
 
@@ -26,7 +26,7 @@ This library provides a simple interface that enables the following functionalit
 
 ## Documentation
 
-The full API and use documentation for this library is provided [here](docs.sparkfun.com/SparkFun_Soil_Moisture_Arduino_Library/).
+The full API and use documentation for this library is provided [here](docs.sparkfun.com/SparkFun_Soil_Moisture_Arduino_Library/). For a quick reference, the main methods available in the library are listed [here](https://docs.sparkfun.com/SparkFun_Soil_Moisture_Arduino_Library/functions.html).
 
 Curious about the hardware this board works with - visit the SparkFun Qwiic Soil Moisture Sensor [hardware repository](https://github.com/sparkfun/Zio-Qwiic-Soil-Moisture-Sensor).
 

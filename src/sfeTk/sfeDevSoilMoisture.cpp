@@ -32,20 +32,12 @@ sfeTkError_t sfeDevSoilMoisture::begin(sfeTkII2C *theBus)
 
     return _theBus->ping();
 }
-// //----------------------------------------------------------------------------------------
-// sfeTkError_t sfeDevSoilMoisture::init(void)
-// {
-//     if (_theBus == nullptr)
-//         return false;
 
-//     // No real init, just make sure that the device is connected
-//     return _theBus->ping();
-// }
 //----------------------------------------------------------------------------------------
 sfeTkError_t sfeDevSoilMoisture::LEDOff(void)
 {
     if (_theBus == nullptr)
-        return false;
+        return kSTkErrFail;
 
     // Send the command to turn the LED off
     return _theBus->writeByte(kCommandLEDOff);
@@ -54,7 +46,7 @@ sfeTkError_t sfeDevSoilMoisture::LEDOff(void)
 sfeTkError_t sfeDevSoilMoisture::LEDOn(void)
 {
     if (_theBus == nullptr)
-        return false;
+        return kSTkErrFail;
 
     // Send the command to turn the LED on
     return _theBus->writeByte(kCommandLEDOn);

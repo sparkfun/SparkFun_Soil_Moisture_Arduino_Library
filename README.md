@@ -73,11 +73,10 @@ The value returned is from 0 (100% wet) to 1024 (0% web - "dry"). The value is a
 The Soil Sensor has user controllable LED and the library has two methods to control if the LED is on or off. The following example shows how to *wink* the LED. 
 
 ```c++
-    // Wink the LED during the reading
-    mySoilSensor.LEDOn();
-    delay(100);
-    mySoilSensor.LEDOff();
-
+// Wink the LED during the reading
+mySoilSensor.LEDOn();
+delay(100);
+mySoilSensor.LEDOff();
 ```
 
 ## Examples

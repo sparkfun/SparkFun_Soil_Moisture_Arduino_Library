@@ -1,8 +1,14 @@
 /*
+ *---------------------------------------------------------------------------------
+ *
+ * Copyright (c) 2025, SparkFun Electronics Inc.
+ *
+ * SPDX-License-Identifier: MIT
+ *
+ *---------------------------------------------------------------------------------
+ */
 
-*/
-
-#include "SparkFun_Soil_Moisture_Sensor.h" // CTRL+Click here to get the library: http://librarymanager/All#SparkFun_Soil_Moisture
+#include "SparkFun_Soil_Moisture_Sensor.h" // CTRL+Click here to get the library: http://librarymanager/All#SparkFun_Soil_Moisture_Sensor
 #include <Wire.h>
 
 SparkFunSoilMoistureSensor mySoilSensor; // Create an instance of the sensor class
@@ -16,6 +22,7 @@ SparkFunSoilMoistureSensor mySoilSensor; // Create an instance of the sensor cla
 #define wirePort Wire
 #endif
 
+
 void setup()
 {
     Serial.begin(115200);
@@ -27,20 +34,28 @@ void setup()
     // Comment out this while loop, or it will prevent the remaining code from running.
 
     Serial.println();
-    Serial.println("Soil Sensor Example 1 - Basic Readings");
+    Serial.println("------------------------------------------------------------");
+    Serial.println("SparkFun Soil Sensor Example 1");
+    Serial.println("Basic Readings");
+    Serial.println("------------------------------------------------------------");
+    Serial.println();
 
     wirePort.begin();
 
     if (mySoilSensor.begin() == false)
     {
-        Serial.println("Soil Moisture Sensor not detected at default I2C address. Verify the sensor is connected "
-                       "correctly. Freezing...");
+        Serial.println("Soil Moisture Sensor not detected at default I2C address. Verify the sensor is connected. Stopping.");
         while (1)
             ;
     }
     Serial.println("Soil Moisture Sensor found!");
+
+    Serial.println();
+    Serial.println("Reading soil moisture sensor...");
+    Serial.println();
 }
 
+//----------------------------------------------------------------------------------------
 void loop()
 {
     // Let's get some readings
@@ -48,5 +63,6 @@ void loop()
     Serial.print("Soil Moisture: ");
     Serial.println(soilMoisture);
 
+    // loop delay - 2 seconds
     delay(2000);
 }

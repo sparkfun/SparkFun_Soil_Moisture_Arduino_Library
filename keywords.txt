@@ -1,0 +1,27 @@
+#######################################
+# Syntax Coloring Map 
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+
+SparkFunSoilMoistureSensor  KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+begin   KEYWORD2
+changeSensorAddress KEYWORD2
+isConnected KEYWORD2
+LEDOff  KEYWORD2
+LEDOn  KEYWORD2
+readMoistureValue	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+SFE_SOIL_MOISTURE_DEFAULT_I2C_ADDRESS	LITERAL1

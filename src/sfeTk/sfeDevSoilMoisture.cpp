@@ -66,6 +66,22 @@ uint16_t sfeDevSoilMoisture::readMoistureValue(void)
 }
 
 //----------------------------------------------------------------------------------------
+// Returns the moisture ratio from the sensor (0 - 1.0)
+float sfeDevSoilMoisture::readMoistureRatio(void)
+{
+    if (_theBus == nullptr)
+        return 0.0;
+
+    return (((float)SFE_SOIL_MOISTURE_MAX_VALUE - (float)readMoistureValue()) / (float)SFE_SOIL_MOISTURE_MAX_VALUE);
+}
+
+//----------------------------------------------------------------------------------------
+// Returns the moisture percentage from the sensor (0 - 100%)
+float sfeDevSoilMoisture::readMoisturePercentage(void)
+{
+    return readMoistureRatio() * 100.0;
+}
+//----------------------------------------------------------------------------------------
 sfeTkError_t sfeDevSoilMoisture::changeSensorAddress(uint8_t newAddress)
 {
     if (_theBus == nullptr)

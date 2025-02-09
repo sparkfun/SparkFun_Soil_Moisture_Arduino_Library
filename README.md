@@ -32,14 +32,14 @@ The following outlines the general use of the library in an Arduino Sketch.
 
 At the start of your sketch, the library header file is included using the following statement:
 
-``` c++
+```c++
 #include "SparkFun_Soil_Moisture_Sensor.h" 
 ```
 
 Before the arduino ```setup()``` function, create a Soil Sensor object in your file with the following declaration:
 
 For I2C bus:
-``` c++
+```c++
 SparkFunSoilMoistureSensorI2C mySoilSensor; // Create an instance of the sensor class
 ```
 

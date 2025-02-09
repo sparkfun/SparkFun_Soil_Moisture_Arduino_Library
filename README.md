@@ -24,6 +24,70 @@ This library provides a simple interface that enables the following functionalit
 * Turn the on-board LED on and off
 * Change the I2C address of the sensor - if you want to avoid a conflict, or used multiple moisture sensors together. 
 
+## General Use 
+
+The following outlines the general use of the library in an Arduino Sketch. 
+
+### Declaration
+
+At the start of your sketch, the library header file is included using the following statement:
+
+```c++
+#include "SparkFun_Soil_Moisture_Sensor.h" 
+```
+
+Before the arduino ```setup()``` function, create a Soil Sensor object in your file with the following declaration:
+
+```c++
+SparkFunSoilMoistureSensor mySoilSensor; // Create an instance of the sensor class
+```
+
+### Initialization
+
+In the Arduino ```setup()``` function, initialize the sensor by calling the begin method. This method is called after the Arduino `Wire` (I2C) library is initialized. 
+
+```c++
+if (mySoilSensor.begin() == false)
+{
+    Serial.println("Soil Moisture Sensor not detected at default I2C address. Verify the sensor is connected. Stopping.");
+    while (1)
+        ;
+}
+```
+
+The begin method returns true if the sensor is connected and available, and false if it is not. If a value of ```false``` is returned in the above example, the  sketch execution is halted.
+
+### Usage
+
+#### Read Value
+To read the value from the sensor, the ```readMoistureValue()``` method is called on the sensor object.
+
+```c++
+uint16_t soilMoisture = mySoilSensor.readMoistureValue();
+```
+
+The value returned is from 0 (100% wet) to 1024 (0% web - "dry"). The value is a measurement of resistance between the sensors two probes. The value range is based on the capabilities of the Analog to Digital converter (ADC) on the sensors microcontroller - it's 10 bits with a max value of 2^10 = 1024. 
+
+#### Control the On-Sensor LED
+
+The Soil Sensor has user controllable LED and the library has two methods to control if the LED is on or off. The following example shows how to *wink* the LED. 
+
+```c++
+    // Wink the LED during the reading
+    mySoilSensor.LEDOn();
+    delay(100);
+    mySoilSensor.LEDOff();
+
+```
+
+## Examples
+
+The following examples are provided with the library
+
+- [Basic Readings](examples/Example_01_BasicReadings/Example_01_BasicReadings.ino) - Setup and read the soil moisture from the sensor
+- [Readings and LED](examples/Example_02_ReadingsAndLED/Example_02_ReadingsAndLED.ino) - Flash the sensor LED when reading the moisture value
+- [LED Flash Based on Moisture Percentage](examples/Example_03_LEDFlashMoisture/Example_03_LEDFlashMoisture.ino) - Vary the sensor LED flash rate based on the moisture percent sensed. The flash rate increases the drier the sensed value
+
 ## Documentation
 
 The full API and use documentation for this library is provided [here](docs.sparkfun.com/SparkFun_Soil_Moisture_Arduino_Library/). For a quick reference, the main methods available in the library are listed [here](https://docs.sparkfun.com/SparkFun_Soil_Moisture_Arduino_Library/functions.html).

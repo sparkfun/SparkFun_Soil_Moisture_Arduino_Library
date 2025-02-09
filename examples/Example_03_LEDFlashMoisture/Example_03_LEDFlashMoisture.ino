@@ -1,5 +1,5 @@
 /*
-*---------------------------------------------------------------------------------
+ *---------------------------------------------------------------------------------
  *
  * Copyright (c) 2025, SparkFun Electronics Inc.
  *
@@ -29,21 +29,17 @@ SparkFunSoilMoistureSensor mySoilSensor; // Create an instance of the sensor cla
 //  100% Wet = off
 //
 // To do this, the following is done:
-//  1. Read the sensor value
+//  1. Get the sensor value as a ration of moisture (0 - 1.0)
 //  2. Calculate the percentage of wetness and multiply by 10 using integer math (floor)- this gives a value of 0 to 10
-//  3. The LED flash_rate = value * increment_value, if value is 0, rate = <fast_value> seconds a value of 1 second for 0% wetness and 
+//  3. The LED flash_rate = value * increment_value, if value is 0, rate = <fast_value> seconds a value of 1 second for
+//  0% wetness and
 //    "off" for > 90% wetness
-
-
-
-// Define our max dry value - note using a float here 
-#define MAX_DRY_VALUE 1024.0
 
 // Min flash rate in ms (2 seconds)
 #define FAST_FLASH_RATE 2000
 
 // Max flash rate in ms (1 day) - basically off
-#define MAX_FLASH_RATE 86400000
+#define LONG_FLASH_RATE 86400000
 
 // Define our increment value = 10000ms (10 seconds)
 #define FLASH_INCREMENT 10000
@@ -93,8 +89,9 @@ void setup()
     // Check if the sensor is connected and initialize it
     if (mySoilSensor.begin() == false)
     {
-        Serial.println("Soil Moisture Sensor not detected at default I2C address. Verify the sensor is connected. Stopping.");
-                       
+        Serial.println(
+            "Soil Moisture Sensor not detected at default I2C address. Verify the sensor is connected. Stopping.");
+
         while (1)
             ;
     }
@@ -105,83 +102,60 @@ void setup()
     Serial.println();
     Serial.println("LED will flash based on the soil moisture reading:");
     Serial.print("  < 10% Wet = 1 flash every ");
-    Serial.print(FAST_FLASH_RATE/1000);
+    Serial.print(FAST_FLASH_RATE / 1000);
     Serial.println(" seconds");
     Serial.print("  10%-90% Wet = flash rate proportional to the percentage of wetness: ");
-    Serial.print(FLASH_INCREMENT/1000);
+    Serial.print(FLASH_INCREMENT / 1000);
     Serial.println(" seconds per 10% range");
     Serial.println("  > 90% Wet = LED off");
     Serial.println();
 
     mySoilSensor.LEDOff();
 
-    // setup the initial blink rate bin - off 
-    blinkRate= MAX_FLASH_RATE;
+    // setup the initial blink rate bin - off
+    blinkRate = LONG_FLASH_RATE;
 
     // initial last blink time - now!
-    lastBlinkTime = millis(); 
+    lastBlinkTime = millis();
 
     Serial.println("Reading soil moisture sensor...");
     Serial.println();
-
-
 }
 
 //----------------------------------------------------------------------------------------
-void loop()
+// A function to get the blink rate based on the soil moisture ration (0 - 1.0)
+uint32_t getBlinkRate(float wetRatio)
 {
-    // Let's get the soil moisture reading
-    uint16_t soilMoisture = mySoilSensor.readMoistureValue();
-
-    // Wet ration 0 - 1.0
-    float wetRatio = ((MAX_DRY_VALUE   - (float)soilMoisture) / MAX_DRY_VALUE);
-
-    // Output the value:
-    Serial.print("Soil Moisture: ");
-    Serial.print(soilMoisture);
-    Serial.print(" (sensor value), ");
-    Serial.print(wetRatio * 100);
-    Serial.println("% wet");
-
-    // Update the blink rate based on the soil moisture reading
-    updateBlinkRate(wetRatio);
-    
-    // check if we need to flash the LED
-    checkForLEDBlink();
-    
-    // delay our reading.
-    delay(LOOP_DELAY);
-}
-
-//----------------------------------------------------------------------------------------
-// A function to update the blink rate based on the soil moisture ration (0 - 1.0)
-void updateBlinkRate(float wetRatio)
-{
+    // our return value
+    uint32_t newBlinkRate = 0;
 
     // Calculate the delay rate "bin" (wet ratio * 10) for the LED based on this current reading
     // The rate bin is a value from 0 to 10
-    uint32_t blinkRateBin =  wetRatio * 10;
+    uint32_t blinkRateBin = wetRatio * 10;
 
-    // What is the blink rate in ms?
-    if (blinkRateBin == 0)
+    // Determine the blink rate based on the bin
+    switch (blinkRateBin)
     {
+    case 0:
         // 0% wet - Flash at the fast rate
-        blinkRate = FAST_FLASH_RATE;
-    }
-    else if (blinkRateBin > 8)
-    {
-        // 90% - 100% wet - LED off
-        blinkRate = MAX_FLASH_RATE; // 1 day - basically off
-    }else {
+        newBlinkRate = FAST_FLASH_RATE;
+        break;
+    case 9:
+    case 10:
+        // rate > 80% (90% - 100%)
+        newBlinkRate = LONG_FLASH_RATE; // 1 day - basically off
+        break;
+    default:
         // 10%-90% wet - rate proportional to the percentage of wetness
-        blinkRate = blinkRateBin * FLASH_INCREMENT;
+        newBlinkRate = blinkRateBin * FLASH_INCREMENT;
     }
 
+    return newBlinkRate;
 }
 
 //----------------------------------------------------------------------------------------
 // A function to check if we need to flash the LED based on elapsed time from last blink
-void checkForLEDBlink(void )
+void checkForLEDBlink(void)
 {
     // do we need to flash the LED?
     if (millis() - lastBlinkTime > blinkRate)
@@ -193,4 +167,33 @@ void checkForLEDBlink(void )
 
         lastBlinkTime = millis();
     }
+}
+//----------------------------------------------------------------------------------------
+void loop()
+{
+    // Output the value:
+    Serial.print("Soil Moisture: ");
+    Serial.print(mySoilSensor.readMoistureValue());
+    Serial.print(" (sensor value), ");
+
+    // Now the percent moisture
+    Serial.print(mySoilSensor.readMoisturePercentage());
+    Serial.println("% wet");
+
+    // The current blink rate based on the soil moisture ratio reading
+    uint32_t newBlinkRate = getBlinkRate(mySoilSensor.readMoistureRatio());
+
+    // update the blink rate if it has changed
+    if (newBlinkRate != blinkRate)
+    {
+        blinkRate = newBlinkRate;
+        Serial.print("New blink delay: ");
+        Serial.print(blinkRate);
+        Serial.println(" ms");
+    }
+    // check if we need to flash the LED
+    checkForLEDBlink();
+
+    // delay our loop.
+    delay(LOOP_DELAY);
 }

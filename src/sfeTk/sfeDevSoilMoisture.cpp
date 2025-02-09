@@ -21,7 +21,7 @@
 //---------------------------------------------------------------------
 // Core object implementation
 //---------------------------------------------------------------------
-sfeTkError_t sfeDevSoilMoisture::begin(sfeTkII2C *theBus)
+sfeTkError_t sfeDevSoilMoisture::begin(sfeTkIBus *theBus)
 {
     // Nullptr check
     if (theBus == nullptr)
@@ -30,7 +30,7 @@ sfeTkError_t sfeDevSoilMoisture::begin(sfeTkII2C *theBus)
     // Set bus pointer
     _theBus = theBus;
 
-    return _theBus->ping();
+    return kSTkErrOk;
 }
 
 //----------------------------------------------------------------------------------------

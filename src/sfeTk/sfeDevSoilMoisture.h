@@ -33,7 +33,7 @@ class sfeDevSoilMoisture
     /// @brief Start the driver/begin connecting/comms to the device
     /// @param theBus A pointer to an I2C toolkit object
     /// @return kSTkErrOk if successful, otherwise an error code
-    sfeTkError_t begin(sfeTkII2C *theBus = nullptr);
+    sfeTkError_t begin(sfeTkIBus *theBus = nullptr);
 
     /// @brief Turns off the on-board LED
     /// @return kSTkErrOk if successful, otherwise an error code
@@ -61,7 +61,7 @@ class sfeDevSoilMoisture
     sfeTkError_t changeSensorAddress(uint8_t newAddress);
 
   protected:
-    // The I2C bus the sensor is connected to
-    sfeTkII2C *_theBus;
+    // The toolkit bus the sensor is connected to
+    sfeTkIBus *_theBus;
 
 }; // class sfeDevSoilMoisture

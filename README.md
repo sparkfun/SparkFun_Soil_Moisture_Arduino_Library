@@ -66,7 +66,19 @@ To read the value from the sensor, the ```readMoistureValue()``` method is calle
 uint16_t soilMoisture = mySoilSensor.readMoistureValue();
 ```
 
-The value returned is from 0 (100% wet) to 1024 (0% web - "dry"). The value is a measurement of resistance between the sensors two probes. The value range is based on the capabilities of the Analog to Digital converter (ADC) on the sensors microcontroller - it's 10 bits with a max value of 2^10 = 1024. 
+The value returned is from 0 (100% wet) to 1023 (0% web - "dry"). The value is a measurement of resistance between the sensors two probes. The value range is based on the capabilities of the Analog to Digital converter (ADC) on the sensors microcontroller - it's 10 bits with a max value of 2^10 = 1024. 
+
+To read the percent moist value, call the ```readMoisturePercentage()``` method:
+
+```c++
+float percent = mySoilSensor.readMoisturePercentage();
+```
+
+To read the moisture ration value (0 - 1.0), call the ```readMoistureRation()``` method:
+
+```c++
+float wetRatio = mySoilSensor.readMoistureRatio();
+```
 
 #### Control the On-Sensor LED
 

@@ -18,10 +18,6 @@
 #include <SparkFun_Toolkit.h>
 #include "sfeTk/sfeDevSoilMoisture.h"
 
-
-// make a nice Arduino define for the default address
-#define SFE_SOIL_MOISTURE_DEFAULT_I2C_ADDRESS kSfeDevSoilMoistureDefaultI2CAddress
-
 // Define our Arduino Object
 class SparkFunSoilMoistureSensor : public sfeDevSoilMoisture
 {

@@ -5,6 +5,17 @@
  *
  * SPDX-License-Identifier: MIT
  *
+ * This example demonstrates how to read the soil moisture sensor value and flash the senors on-board LED.
+ * 
+ * Supported Sensor:
+ *  Qwiic Soil Moisture Sensor https://www.sparkfun.com/sparkfun-qwiic-soil-moisture-sensor.html
+ * 
+ * Hardware Connections:
+ * - Connect the Qwiic Soil Moisture Sensor to the Qwiic connector of your development board (SparkFun Thing Plus, ReadBoard ...etc.)
+ *   If you don't have a development board with a Qwiic connector, you can purchase one at sparkfun.com
+ * - Connect the development board to your computer using a USB cable.
+ * - Open the Serial Monitor at a baud rate of 115200 to see the sketch output.
+ * 
  *---------------------------------------------------------------------------------
  */
 

@@ -5,6 +5,18 @@
  *
  * SPDX-License-Identifier: MIT
  *
+ * This example demonstrates how to read the soil moisture sensor value and use the mositure value to control the on-board LED
+ * flash rate. The drier the soil, the faster the LED flashes.
+ * 
+ * Supported Sensor:
+ *  Qwiic Soil Moisture Sensor https://www.sparkfun.com/sparkfun-qwiic-soil-moisture-sensor.html
+ * 
+ * Hardware Connections:
+ * - Connect the Qwiic Soil Moisture Sensor to the Qwiic connector of your development board (SparkFun Thing Plus, ReadBoard ...etc.)
+ *   If you don't have a development board with a Qwiic connector, you can purchase one at sparkfun.com
+ * - Connect the development board to your computer using a USB cable.
+ * - Open the Serial Monitor at a baud rate of 115200 to see the sketch output.
+ * 
  *---------------------------------------------------------------------------------
  */
 
@@ -19,7 +31,7 @@ SparkFunSoilMoistureSensorI2C mySoilSensor; // Create an instance of the sensor 
 // The plan:
 //    The value of the sensor has the following range:
 //       0    = 100% wet soil (no resistance)
-//       1024 = 0% wet soil (infinite resistance) note: the sensors ADC is 10-bit 2^10 = 1024
+//       1023 = 0% wet soil (infinite resistance) note: the sensors ADC is 10-bit 2^10 = 1024-1
 //
 //    The LED will flash faster the drier the soil is. The LED will be effectively off when the soil is 100% wet.
 //

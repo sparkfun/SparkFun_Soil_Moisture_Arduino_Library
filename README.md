@@ -63,30 +63,30 @@ if (mySoilSensor.begin() == false)
 }
 ~~~
 
-The begin method returns true if the sensor is connected and available, and false if it is not. If a value of ```false``` is returned in the above example, the  sketch execution is halted.
+The begin method returns true if the sensor is connected and available, and false if it is not. If a value of *false* is returned in the above example, the  sketch execution is halted.
 
 ### Usage
 
 #### Read Value
-To read the value from the sensor, the ```readMoistureValue()``` method is called on the sensor object.
+To read the value from the sensor, the *readMoistureValue()* method is called on the sensor object.
 
-```cpp
+~~~cpp
 uint16_t soilMoisture = mySoilSensor.readMoistureValue();
-```
+~~~
 
 The value returned is from 0 (100% wet) to 1023 (0% web - "dry"). The value is a measurement of resistance between the sensors two probes. The value range is based on the capabilities of the Analog to Digital converter (ADC) on the sensors microcontroller - it's 10 bits with a max value of 2^10 = 1024. 
 
-To read the percent moist value, call the ```readMoisturePercentage()``` method:
+To read the percent moist value, call the *readMoisturePercentage()* method:
 
-```cpp
+~~~cpp
 float percent = mySoilSensor.readMoisturePercentage();
-```
+~~~
 
 To read the moisture ration value (0 - 1.0), call the ```readMoistureRation()``` method:
 
-```cpp
+~~~cpp
 float wetRatio = mySoilSensor.readMoistureRatio();
-```
+~~~
 
 #### Control the On-Sensor LED
 

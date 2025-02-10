@@ -69,7 +69,7 @@ class SparkFunSoilMoistureSensorSPI : public sfeDevSoilMoisture
         // Setup Arduino SPI bus
         _theSPIBus.init(spiPort, spiSettings, csPin, true);
 
-        // Begin the sensor and make sure it's connected.
+        // Begin the sensor with the SPI bus connection
         return (sfeDevSoilMoisture::begin(&_theSPIBus) == kSTkErrOk );
     }
 

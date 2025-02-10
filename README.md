@@ -32,7 +32,7 @@ The following outlines the general use of the library in an Arduino Sketch.
 
 At the start of your sketch, the library header file is included using the following statement:
 
-~~~c
+~~~cpp
 #include "SparkFun_Soil_Moisture_Sensor.h" 
 ~~~
 

@@ -68,6 +68,7 @@ The begin method returns true if the sensor is connected and available, and fals
 ### Usage
 
 #### Read Value
+
 To read the value from the sensor, the *readMoistureValue()* method is called on the sensor object.
 
 ~~~cpp
@@ -92,12 +93,12 @@ float wetRatio = mySoilSensor.readMoistureRatio();
 
 The Soil Sensor has user controllable LED and the library has two methods to control if the LED is on or off. The following example shows how to *wink* the LED. 
 
-```c++
+~~~cpp
 // Wink the LED during the reading
 mySoilSensor.LEDOn();
 delay(100);
 mySoilSensor.LEDOff();
-```
+~~~
 
 ## Examples
 

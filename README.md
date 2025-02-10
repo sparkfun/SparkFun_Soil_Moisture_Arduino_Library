@@ -70,7 +70,7 @@ The begin method returns true if the sensor is connected and available, and fals
 #### Read Value
 To read the value from the sensor, the ```readMoistureValue()``` method is called on the sensor object.
 
-```c++
+```cpp
 uint16_t soilMoisture = mySoilSensor.readMoistureValue();
 ```
 
@@ -78,13 +78,13 @@ The value returned is from 0 (100% wet) to 1023 (0% web - "dry"). The value is a
 
 To read the percent moist value, call the ```readMoisturePercentage()``` method:
 
-```c++
+```cpp
 float percent = mySoilSensor.readMoisturePercentage();
 ```
 
 To read the moisture ration value (0 - 1.0), call the ```readMoistureRation()``` method:
 
-```c++
+```cpp
 float wetRatio = mySoilSensor.readMoistureRatio();
 ```
 

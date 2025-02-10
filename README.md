@@ -39,28 +39,28 @@ At the start of your sketch, the library header file is included using the follo
 Before the arduino ```setup()``` function, create a Soil Sensor object in your file with the following declaration:
 
 For I2C bus:
-```c++
+~~~c++
 SparkFunSoilMoistureSensorI2C mySoilSensor; // Create an instance of the sensor class
-```
+~~~
 
 For SPI bus:
-```c++
+~~~c++
 SparkFunSoilMoistureSensorSPI mySoilSensor; // Create an instance of the sensor class
-```
+~~~
 
 
 ### Initialization
 
 In the Arduino ```setup()``` function, initialize the sensor by calling the begin method. This method is called after the Arduino `Wire` (I2C) library is initialized. 
 
-```c++
+~~~c++
 if (mySoilSensor.begin() == false)
 {
     Serial.println("Soil Moisture Sensor not detected at default I2C address. Verify the sensor is connected. Stopping.");
     while (1)
         ;
 }
-```
+~~~
 
 The begin method returns true if the sensor is connected and available, and false if it is not. If a value of ```false``` is returned in the above example, the  sketch execution is halted.
 

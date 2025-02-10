@@ -40,13 +40,13 @@ Before the arduino ```setup()``` function, create a Soil Sensor object in your f
 
 For I2C bus:
 
-~~~cpp
+~~~c
 SparkFunSoilMoistureSensorI2C mySoilSensor; // Create an instance of the sensor class
 ~~~
 
 For SPI bus:
 
-~~~cpp
+~~~c
 SparkFunSoilMoistureSensorSPI mySoilSensor; // Create an instance of the sensor class
 ~~~
 

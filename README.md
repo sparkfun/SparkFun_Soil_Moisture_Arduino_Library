@@ -39,15 +39,16 @@ At the start of your sketch, the library header file is included using the follo
 Before the arduino ```setup()``` function, create a Soil Sensor object in your file with the following declaration:
 
 For I2C bus:
+
 ~~~c++
 SparkFunSoilMoistureSensorI2C mySoilSensor; // Create an instance of the sensor class
 ~~~
 
 For SPI bus:
+
 ~~~c++
 SparkFunSoilMoistureSensorSPI mySoilSensor; // Create an instance of the sensor class
 ~~~
-
 
 ### Initialization
 

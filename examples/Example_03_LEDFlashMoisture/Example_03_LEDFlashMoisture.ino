@@ -31,9 +31,8 @@ SparkFunSoilMoistureSensorI2C mySoilSensor; // Create an instance of the sensor 
 // To do this, the following is done:
 //  1. Get the sensor value as a ration of moisture (0 - 1.0)
 //  2. Calculate the percentage of wetness and multiply by 10 using integer math (floor)- this gives a value of 0 to 10
-//  3. The LED flash_rate = value * increment_value, if value is 0, rate = <fast_value> seconds a value of 1 second for
-//  0% wetness and
-//    "off" for > 90% wetness
+//  3. The LED flash_rate = value * increment_value, if value is 0 (0% moisture), rate = <fast_value> seconds. If the
+//     value >= 90% (9 or 10), rate = <long_value> seconds. Otherwise, rate = value * increment_value
 
 // Min flash rate in ms (2 seconds)
 #define FAST_FLASH_RATE 2000

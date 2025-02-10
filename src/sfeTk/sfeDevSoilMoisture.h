@@ -7,12 +7,13 @@
  *
  *---------------------------------------------------------------------------------
  */
-// Actual implementation def of the soil moisture sensor
+// Actual implementation of the soil moisture sensor - this is a platform "independent" implementation
 
 #pragma once
 
 #include <cstdint>
-#include "sfeTk/sfeTkII2C.h"
+
+// include the sparkfun toolkit headers
 #include <sfeTk/sfeToolKit.h>
 
 // Default I2C address for the sensor

@@ -8,6 +8,7 @@
  *
  *---------------------------------------------------------------------------------
  */
+
 #include "sfeDevSoilMoisture.h"
 
 // Impl for the core driver
@@ -21,6 +22,7 @@
 //---------------------------------------------------------------------
 // Core object implementation
 //---------------------------------------------------------------------
+// start up the sensor
 sfeTkError_t sfeDevSoilMoisture::begin(sfeTkIBus *theBus)
 {
     // Nullptr check
@@ -34,6 +36,7 @@ sfeTkError_t sfeDevSoilMoisture::begin(sfeTkIBus *theBus)
 }
 
 //----------------------------------------------------------------------------------------
+// LED off command
 sfeTkError_t sfeDevSoilMoisture::LEDOff(void)
 {
     if (_theBus == nullptr)
@@ -43,6 +46,7 @@ sfeTkError_t sfeDevSoilMoisture::LEDOff(void)
     return _theBus->writeByte(kCommandLEDOff);
 }
 //----------------------------------------------------------------------------------------
+// LED on command
 sfeTkError_t sfeDevSoilMoisture::LEDOn(void)
 {
     if (_theBus == nullptr)
@@ -53,6 +57,7 @@ sfeTkError_t sfeDevSoilMoisture::LEDOn(void)
 }
 
 //----------------------------------------------------------------------------------------
+// Read the moisture value from the sensor - returns a resistance reading between 0 and 1023
 uint16_t sfeDevSoilMoisture::readMoistureValue(void)
 {
     if (_theBus == nullptr)
@@ -82,6 +87,7 @@ float sfeDevSoilMoisture::readMoisturePercentage(void)
     return readMoistureRatio() * 100.0;
 }
 //----------------------------------------------------------------------------------------
+// Change the I2C address of the sensor
 sfeTkError_t sfeDevSoilMoisture::changeSensorAddress(uint8_t newAddress)
 {
     if (_theBus == nullptr)

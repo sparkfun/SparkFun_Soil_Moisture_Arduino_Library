@@ -43,14 +43,20 @@ SparkFunSoilMoistureSensorI2C mySoilSensor; // Create an instance of the sensor 
 // Define our increment value = 10000ms (10 seconds)
 #define FLASH_INCREMENT 10000
 
-// Time between loop iterations - 5 second (should not be greater that FAST_FLASH_RATE)
+// Time between loop iterations - Just make it the same as our FAST RATE.
 #define LOOP_DELAY FAST_FLASH_RATE
+
+// Time between Soil Moisture readings  - 30 seconds
+#define SOIL_MOISTURE_READ_RATE 30000
 
 // Define a variable for the last blink time - in ms since boot
 uint32_t lastBlinkTime = 0;
 
 // Define a variable for the blink rate - delay between blinks in ms
 uint32_t blinkRate = 0;
+
+// Define the last time we read the soil moisture sensor
+uint32_t lastSensorReadTime = 0;
 
 // Some Dev boards have their QWIIC connector on Wire or Wire1
 // This #ifdef will help this sketch work across more products
@@ -97,6 +103,11 @@ void setup()
 
     Serial.println("Soil Moisture Sensor found!");
 
+    // Print out read rate information
+    Serial.println();
+    Serial.print("Reading soil moisture sensor every ");
+    Serial.print(SOIL_MOISTURE_READ_RATE / 1000);
+    Serial.println(" seconds");
     // print out the LED flash rate information
     Serial.println();
     Serial.println("LED will flash based on the soil moisture reading:");
@@ -116,6 +127,8 @@ void setup()
 
     // initial last blink time - now!
     lastBlinkTime = millis();
+    // initial last sensor read time - just 0; 
+    lastSensorReadTime = 0;
 
     Serial.println("Reading soil moisture sensor...");
     Serial.println();
@@ -168,31 +181,46 @@ void checkForLEDBlink(void)
     }
 }
 //----------------------------------------------------------------------------------------
+// Check the sensor value and update the blink rate if needed
+void checkSensorValue(void)
+{
+    // Need to output/get the sensor value - has the time between reads elapsed?
+    // Or is this our first check?
+    if (millis() - lastSensorReadTime > SOIL_MOISTURE_READ_RATE || lastSensorReadTime == 0)
+    {
+        // Output the value:
+        Serial.print("Soil Moisture: ");
+        Serial.print(mySoilSensor.readMoistureValue());
+        Serial.print(" (sensor value), ");
+
+        // Now the percent moisture
+        Serial.print(mySoilSensor.readMoisturePercentage());
+        Serial.println("% wet");
+
+        // The current blink rate based on the soil moisture ratio reading - update?
+        uint32_t newBlinkRate = getBlinkRate(mySoilSensor.readMoistureRatio());
+
+        // update the blink rate if it has changed
+        if (newBlinkRate != blinkRate)
+        {
+            blinkRate = newBlinkRate;
+            Serial.print("New blink delay: ");
+            Serial.print(blinkRate/1000);
+            Serial.println(" seconds");
+        }
+        // update the last read time
+        lastSensorReadTime = millis();
+    }
+}
+//----------------------------------------------------------------------------------------
 void loop()
 {
-    // Output the value:
-    Serial.print("Soil Moisture: ");
-    Serial.print(mySoilSensor.readMoistureValue());
-    Serial.print(" (sensor value), ");
+     // check if we need to flash the LED
+     checkForLEDBlink();
 
-    // Now the percent moisture
-    Serial.print(mySoilSensor.readMoisturePercentage());
-    Serial.println("% wet");
+    // Need to output/get the sensor value?
+    checkSensorValue();
 
-    // The current blink rate based on the soil moisture ratio reading
-    uint32_t newBlinkRate = getBlinkRate(mySoilSensor.readMoistureRatio());
-
-    // update the blink rate if it has changed
-    if (newBlinkRate != blinkRate)
-    {
-        blinkRate = newBlinkRate;
-        Serial.print("New blink delay: ");
-        Serial.print(blinkRate);
-        Serial.println(" ms");
-    }
-    // check if we need to flash the LED
-    checkForLEDBlink();
-
-    // delay our loop.
+    // loop delay
     delay(LOOP_DELAY);
 }

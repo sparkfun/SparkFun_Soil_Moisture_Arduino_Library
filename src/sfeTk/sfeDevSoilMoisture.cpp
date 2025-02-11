@@ -88,7 +88,7 @@ float sfeDevSoilMoisture::readMoisturePercentage(void)
 }
 //----------------------------------------------------------------------------------------
 // Change the I2C address of the sensor
-sfeTkError_t sfeDevSoilMoisture::changeSensorAddress(uint8_t newAddress)
+sfeTkError_t sfeDevSoilMoisture::setI2CAddress(uint8_t newAddress)
 {
     if (_theBus == nullptr)
         return kSTkErrFail;
@@ -97,6 +97,28 @@ sfeTkError_t sfeDevSoilMoisture::changeSensorAddress(uint8_t newAddress)
     if (newAddress < 0x07 || newAddress > 0x78)
         return kSTkErrFail;
 
-    // Send the command to change the address
-    return _theBus->writeRegisterByte(kCommandChangeAddress, newAddress);
+    // If in I2C mode, is the address the same as the current address?
+    if (_theBus->type() == kBusTypeI2C && ((sfeTkII2C *)_theBus)->address() == newAddress)
+        return kSTkErrOk;
+
+    // Send the command to change the address. NOTE: Because of how the sensor works, 
+    // the following will return an error (since the sensor side resets the bus)
+    (void) _theBus->writeRegisterByte(kCommandChangeAddress, newAddress);
+
+    return kSTkErrOk;
+}
+//----------------------------------------------------------------------------------------
+// Return the address of the sensor bus. For I2C this is the address of the sensor, for
+// SPI this is the CS pin
+uint8_t sfeDevSoilMoisture::address(void)
+{
+    if (_theBus == nullptr)
+        return 0;
+
+    if (_theBus->type() == kBusTypeSPI)
+        return ((sfeTkISPI *)_theBus)->cs();
+    else if (_theBus->type() == kBusTypeI2C)
+        return ((sfeTkII2C *)_theBus)->address();
+    
+    return 0;
 }

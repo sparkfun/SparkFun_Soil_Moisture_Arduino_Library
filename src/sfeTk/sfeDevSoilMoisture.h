@@ -16,6 +16,10 @@
 // include the sparkfun toolkit headers
 #include <sfeTk/sfeToolKit.h>
 
+// Bus interfaces
+#include <sfeTk/sfeTkII2C.h>
+#include <sfeTk/sfeTkISPI.h>
+
 // Default I2C address for the sensor
 #define SFE_SOIL_MOISTURE_DEFAULT_I2C_ADDRESS 0x28
 
@@ -59,7 +63,12 @@ class sfeDevSoilMoisture
     /// @brief Changes the I2C address of the sensor
     /// @param newAddress The new I2C address to assign to the sensor
     /// @return kSTkErrOk if successful, otherwise an error code
-    sfeTkError_t changeSensorAddress(uint8_t newAddress);
+    /// @note If communicating via I2C, the provided address is used for future communication
+    sfeTkError_t setI2CAddress(uint8_t newAddress);
+
+    /// @brief Returns the current address of the sensor. I2C - bus address, SPI - CS Pin
+    //  @return The current I2C address of the sensor, or the CS pin for SPI
+    uint8_t address(void);
 
   protected:
     // The toolkit bus the sensor is connected to

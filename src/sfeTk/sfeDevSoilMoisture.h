@@ -11,7 +11,7 @@
 
 #pragma once
 
-#include <cstdint>
+#include <stdint.h>
 
 // include the sparkfun toolkit headers
 #include <sfeTk/sfeToolKit.h>

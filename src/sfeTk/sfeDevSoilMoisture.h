@@ -14,7 +14,7 @@
 #include <stdint.h>
 
 // include the sparkfun toolkit headers
-#include <sfeTk/sfeToolKit.h>
+#include <sfeTk/sfeToolkit.h>
 
 // Bus interfaces
 #include <sfeTk/sfeTkII2C.h>

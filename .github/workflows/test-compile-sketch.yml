@@ -95,7 +95,7 @@ jobs:
 
       # Setup Arduino command line - install esp32 and all the libs flux needs
       - name: Arduino - Install and setup the Arduino CLI
-        uses: arduino/setup-arduino-cli@v1
+        uses: arduino/setup-arduino-cli@v2
 
       - name: Arduino - Start config file
         run: arduino-cli config init --additional-urls ${{ matrix.board.psource-url}}

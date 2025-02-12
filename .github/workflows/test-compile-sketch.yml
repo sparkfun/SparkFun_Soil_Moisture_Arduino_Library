@@ -101,7 +101,7 @@ jobs:
           fqbn: ${{ matrix.board.fqbn }}
           libraries: |
             - source-path: ./
-            - source-url:  https://github.com/sparkfun/SparkFun_Toolkit.git#dc0f0ca           
+            - source-url:  https://github.com/sparkfun/SparkFun_Toolkit.git#dc0f0ca
           sketch-paths: |
             - examples/Example_01_BasicReadings
           enable-warnings-report: true

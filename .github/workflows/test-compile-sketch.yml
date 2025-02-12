@@ -100,6 +100,7 @@ jobs:
           fqbn: ${{ matrix.board.fqbn }}
           libraries: |
             - source-path: ./
+            - name: "SparkFun Toolkit"            
           sketch-paths: |
             - examples/Example_01_BasicReadings
           enable-warnings-report: true

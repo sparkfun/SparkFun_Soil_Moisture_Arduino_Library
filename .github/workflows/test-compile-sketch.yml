@@ -115,7 +115,7 @@ jobs:
             arduino-cli lib install --git-url https://github.com/sparkfun/SparkFun_Toolkit.git#dc0f0ca
 
       - name: Compile Sketch
-        run: arduino-cli compile --fqbn ${{ matrix.board.fqbn }} examples/Example_01_BasicReadings
+        run: arduino-cli compile --fqbn ${{ matrix.board.fqbn }} examples/Example_01_BasicReadings --library .
     # note using a dev branch of the toolkit until version published
     #   - name: Compile Sketch
     #     uses: arduino/compile-sketches@v1.1.0

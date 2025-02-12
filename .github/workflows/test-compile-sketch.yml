@@ -93,6 +93,7 @@ jobs:
       - name: Branch name
         run: echo running on branch ${GITHUB_REF##*/}
 
+    # note using a dev branch of the toolkit until version published
       - name: Compile Sketch
         uses: arduino/compile-sketches@v1.1.0
         with:
@@ -100,7 +101,7 @@ jobs:
           fqbn: ${{ matrix.board.fqbn }}
           libraries: |
             - source-path: ./
-            - name: "SparkFun Toolkit"            
+            - source-url:  https://github.com/sparkfun/SparkFun_Toolkit.git#dc0f0ca           
           sketch-paths: |
             - examples/Example_01_BasicReadings
           enable-warnings-report: true

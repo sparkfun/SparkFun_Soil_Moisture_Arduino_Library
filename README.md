@@ -9,6 +9,7 @@ Arduino Library for the SparkFun Qwiic Soil Moisture Sensor
 ![Release](https://img.shields.io/github/v/release/sparkfun/SparkFun_Soil_Moisture_Arduino_Library)
 ![Release Date](https://img.shields.io/github/release-date/sparkfun/SparkFun_Soil_Moisture_Arduino_Library)
 ![Documentation - build](https://img.shields.io/github/actions/workflow/status/sparkfun/SparkFun_Soil_Moisture_Arduino_LIbrary/build-deploy-ghpages.yml?label=doc%20build)
+![Compile - Test](https://img.shields.io/github/actions/workflow/status/sparkfun/SparkFun_Soil_Moisture_Arduino_LIbrary/test-compile-sketch.yml?label=compile%20test)
 ![GitHub issues](https://img.shields.io/github/issues/sparkfun/SparkFun_Soil_Moisture_Arduino_Library)
 
 

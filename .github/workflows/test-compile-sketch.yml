@@ -20,8 +20,8 @@ jobs:
           # https://github.com/arduino/ArduinoCore-avr/blob/master/boards.txt
           - fqbn: arduino:avr:mega
         #     platforms: |
-          - pname: arduino:avr
-          - psource-url: https://downloads.arduino.cc/packages/package_index.json
+            pname: arduino:avr
+            psource-url: https://downloads.arduino.cc/packages/package_index.json
 
           # ESP32
           # https://github.com/espressif/arduino-esp32/blob/master/boards.txt
@@ -34,57 +34,57 @@ jobs:
           # https://github.com/espressif/arduino-esp32/blob/master/boards.txt
           - fqbn: esp32:esp32:esp32s2
         #     platforms: |
-          - pname: esp32:esp32
-          - psource-url: https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
+            pname: esp32:esp32
+            psource-url: https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
 
           # ESP32-C3
           # https://github.com/espressif/arduino-esp32/blob/master/boards.txt
           - fqbn: esp32:esp32:esp32c3
         #     platforms: |
-          - pname: esp32:esp32
-          - psource-url: https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
+            pname: esp32:esp32
+            psource-url: https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
 
           # Artemis / Apollo3
           # https://github.com/sparkfun/Arduino_Apollo3/blob/main/boards.txt
           - fqbn: SparkFun:apollo3:sfe_artemis_atp
         #     platforms: |
-          - pname: SparkFun:apollo3
-          - psource-url: https://raw.githubusercontent.com/sparkfun/Arduino_Apollo3/master/package_sparkfun_apollo3_index.json
+            pname: SparkFun:apollo3
+            psource-url: https://raw.githubusercontent.com/sparkfun/Arduino_Apollo3/master/package_sparkfun_apollo3_index.json
 
           # ESP8266
           # https://github.com/esp8266/Arduino/blob/master/boards.txt
           - fqbn: esp8266:esp8266:thingdev
         #     platforms: |
-          - pname: esp8266:esp8266
-          - psource-url: https://arduino.esp8266.com/stable/package_esp8266com_index.json
+            pname: esp8266:esp8266
+            psource-url: https://arduino.esp8266.com/stable/package_esp8266com_index.json
 
           # SAMD21
           # https://github.com/arduino/ArduinoCore-samd/blob/master/boards.txt
           - fqbn: arduino:samd:mkr1000
         #     platforms: |
-          - pname: arduino:samd
-          - psource-url: https://downloads.arduino.cc/packages/package_index.json
+            pname: arduino:samd
+            psource-url: https://downloads.arduino.cc/packages/package_index.json
 
           # Nano BLE 33 / nRF52840
           # https://github.com/arduino/ArduinoCore-mbed/blob/master/boards.txt
           - fqbn: arduino:mbed:nano33ble
         #     platforms: |
-          - name: arduino:mbed
-          - psource-url: https://downloads.arduino.cc/packages/package_index.json
+            pname: arduino:mbed
+            psource-url: https://downloads.arduino.cc/packages/package_index.json
 
           # RP2040
           # https://github.com/arduino/ArduinoCore-mbed/blob/master/boards.txt
           - fqbn: rp2040:rp2040:sparkfun_promicrorp2040
         #     platforms: |
-          - name: rp2040:rp2040
-          - psource-url: https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json
+            pname: rp2040:rp2040
+            psource-url: https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json
 
           # STM32
           # https://github.com/arduino/ArduinoCore-mbed/blob/master/boards.txt
           - fqbn: STMicroelectronics:stm32:GenF4
         #     platforms: |
-          - pname: STMicroelectronics:stm32
-          - psource-url: https://github.com/stm32duino/BoardManagerFiles/raw/main/package_stmicroelectronics_index.json
+            pname: STMicroelectronics:stm32
+            psource-url: https://github.com/stm32duino/BoardManagerFiles/raw/main/package_stmicroelectronics_index.json
 
     # not using the arduino action to compile everything - it fails to load libraries at a given ref/branch (using toolkit at a specific commit)
     steps:
@@ -112,7 +112,6 @@ jobs:
         run: |
             arduino-cli config set library.enable_unsafe_install true
             arduino-cli version
-            arduino-cli lib install --git-url https://github.com/sparkfun/SparkFun_Toolkit.git#dc0f0ca
             arduino-cli lib install --git-url https://github.com/sparkfun/SparkFun_Toolkit.git#dc0f0ca
 
       - name: Compile Sketch

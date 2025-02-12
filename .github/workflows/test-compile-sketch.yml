@@ -110,6 +110,8 @@ jobs:
       - name: Arduino - Install libraries
         run: |
             arduino-cli config set library.enable_unsafe_install true
+            arduino-cli version
+            arduino-cli lib install --git-url https://github.com/sparkfun/SparkFun_Toolkit.git#dc0f0ca
             arduino-cli lib install --git-url https://github.com/sparkfun/SparkFun_Toolkit.git#dc0f0ca
 
       - name: Compile Sketch

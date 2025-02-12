@@ -99,7 +99,6 @@ jobs:
           platforms: ${{ matrix.board.platforms }}
           fqbn: ${{ matrix.board.fqbn }}
           libraries: |
-            - name: "SparkFun Toolkit"          
             - source-path: ./
           sketch-paths: |
             - examples/Example_01_BasicReadings

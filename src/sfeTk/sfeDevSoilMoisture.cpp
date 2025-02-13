@@ -43,7 +43,7 @@
  * @brief Command indicating no new data is available
  */
 #define kCommandNothingNew 0x99
-9
+
 //---------------------------------------------------------------------
 // Core object implementation
 //---------------------------------------------------------------------

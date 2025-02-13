@@ -5,18 +5,18 @@
  *
  * SPDX-License-Identifier: MIT
  *
- * This example demonstrates how to read the soil moisture sensor value and use the mositure value to control the on-board LED
- * flash rate. The drier the soil, the faster the LED flashes.
- * 
+ * This example demonstrates how to read the soil moisture sensor value and use the moisture value to control the
+ *  on-board LED flash rate. The drier the soil, the faster the LED flashes.
+ *
  * Supported Sensor:
  *  Qwiic Soil Moisture Sensor https://www.sparkfun.com/sparkfun-qwiic-soil-moisture-sensor.html
- * 
+ *
  * Hardware Connections:
- * - Connect the Qwiic Soil Moisture Sensor to the Qwiic connector of your development board (SparkFun Thing Plus, ReadBoard ...etc.)
- *   If you don't have a development board with a Qwiic connector, you can purchase one at sparkfun.com
+ * - Connect the Qwiic Soil Moisture Sensor to the Qwiic connector of your development board (SparkFun Thing Plus,
+ *   RedBoard ...etc.) If you don't have a development board with a Qwiic connector, you can purchase one at sparkfun.com
  * - Connect the development board to your computer using a USB cable.
  * - Open the Serial Monitor at a baud rate of 115200 to see the sketch output.
- * 
+ *
  *---------------------------------------------------------------------------------
  */
 
@@ -58,8 +58,8 @@ SparkFunSoilMoistureSensorI2C mySoilSensor; // Create an instance of the sensor 
 // Time between loop iterations - Just make it the same as our FAST RATE.
 #define LOOP_DELAY FAST_FLASH_RATE
 
-// Time between Soil Moisture readings  - 30 seconds
-#define SOIL_MOISTURE_READ_RATE 30000
+// Time between Soil Moisture readings  - 15 seconds
+#define SOIL_MOISTURE_READ_RATE 15000
 
 // Define a variable for the last blink time - in ms since boot
 uint32_t lastBlinkTime = 0;
@@ -139,7 +139,7 @@ void setup()
 
     // initial last blink time - now!
     lastBlinkTime = millis();
-    // initial last sensor read time - just 0; 
+    // initial last sensor read time - just 0;
     lastSensorReadTime = 0;
 
     Serial.println("Reading soil moisture sensor...");
@@ -217,7 +217,7 @@ void checkSensorValue(void)
         {
             blinkRate = newBlinkRate;
             Serial.print("New blink delay: ");
-            Serial.print(blinkRate/1000);
+            Serial.print(blinkRate / 1000);
             Serial.println(" seconds");
         }
         // update the last read time
@@ -227,8 +227,8 @@ void checkSensorValue(void)
 //----------------------------------------------------------------------------------------
 void loop()
 {
-     // check if we need to flash the LED
-     checkForLEDBlink();
+    // check if we need to flash the LED
+    checkForLEDBlink();
 
     // Need to output/get the sensor value?
     checkSensorValue();

@@ -27,7 +27,7 @@ sfeTkError_t sfeDevSoilMoisture::begin(sfeTkIBus *theBus)
 {
     // Nullptr check
     if (theBus == nullptr)
-        return kSTkErrFail;
+        return kSTkErrBusNotInit;
 
     // Set bus pointer
     _theBus = theBus;
@@ -40,7 +40,7 @@ sfeTkError_t sfeDevSoilMoisture::begin(sfeTkIBus *theBus)
 sfeTkError_t sfeDevSoilMoisture::LEDOff(void)
 {
     if (_theBus == nullptr)
-        return kSTkErrFail;
+        return kSTkErrBusNotInit;
 
     // Send the command to turn the LED off
     return _theBus->writeByte(kCommandLEDOff);
@@ -50,7 +50,7 @@ sfeTkError_t sfeDevSoilMoisture::LEDOff(void)
 sfeTkError_t sfeDevSoilMoisture::LEDOn(void)
 {
     if (_theBus == nullptr)
-        return kSTkErrFail;
+        return kSTkErrBusNotInit;
 
     // Send the command to turn the LED on
     return _theBus->writeByte(kCommandLEDOn);
@@ -91,7 +91,7 @@ float sfeDevSoilMoisture::readMoisturePercentage(void)
 sfeTkError_t sfeDevSoilMoisture::setI2CAddress(uint8_t newAddress)
 {
     if (_theBus == nullptr)
-        return kSTkErrFail;
+        return kSTkErrBusNotInit;
 
     // Validate the new address
     if (newAddress < 0x07 || newAddress > 0x78)
@@ -101,9 +101,9 @@ sfeTkError_t sfeDevSoilMoisture::setI2CAddress(uint8_t newAddress)
     if (_theBus->type() == kBusTypeI2C && ((sfeTkII2C *)_theBus)->address() == newAddress)
         return kSTkErrOk;
 
-    // Send the command to change the address. NOTE: Because of how the sensor works, 
+    // Send the command to change the address. NOTE: Because of how the sensor works,
     // the following will return an error (since the sensor side resets the bus)
-    (void) _theBus->writeRegisterByte(kCommandChangeAddress, newAddress);
+    (void)_theBus->writeRegisterByte(kCommandChangeAddress, newAddress);
 
     return kSTkErrOk;
 }
@@ -119,6 +119,6 @@ uint8_t sfeDevSoilMoisture::address(void)
         return ((sfeTkISPI *)_theBus)->cs();
     else if (_theBus->type() == kBusTypeI2C)
         return ((sfeTkII2C *)_theBus)->address();
-    
+
     return 0;
 }

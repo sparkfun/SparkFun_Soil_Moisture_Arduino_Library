@@ -1,12 +1,17 @@
 
-/*
- *---------------------------------------------------------------------------------
+/*!
+ * @file SparkFun_Soil_Moisture_Sensor.h
+ * @brief Arduino header file for the SparkFun Soil Moisture Sensor Arduino library
  *
- * Copyright (c) 2025, SparkFun Electronics Inc.
+ * This file contains the class definitions for the SparkFun Soil Moisture Sensor Arduino library,
+ * including methods for initialization, reading moisture values, and controlling the on-board LED.
+ * It provides both I2C and SPI implementations.
  *
+ * @author SparkFun Electronics
+ * @date 2025
+ * @copyright Copyright (c) 2025, SparkFun Electronics Inc. This project is released under the MIT License.
+ * 
  * SPDX-License-Identifier: MIT
- *
- *---------------------------------------------------------------------------------
  */
 
 // A simple wrapper around the SparkFun Soil Moisture Sensor - based on the original example driver /example from Zio

@@ -1,24 +1,49 @@
-
-/*
- *---------------------------------------------------------------------------------
+/**
+ * @file sfeDevSoilMoisture.cpp
+ * @brief Implementation file for the soil moisture sensor class
  *
- * Copyright (c) 2025, SparkFun Electronics Inc.
+ * This file contains the implementation of the soil moisture sensor class, including
+ * methods for initialization, reading moisture values, controlling the on-board LED,
+ * and setting the I2C address.
  *
+ * @author SparkFun Electronics
+ * @date 2025
+ * @copyright Copyright (c) 2025, SparkFun Electronics Inc. This project is released under the MIT License.
+ * 
  * SPDX-License-Identifier: MIT
- *
- *---------------------------------------------------------------------------------
  */
+
 
 #include "sfeDevSoilMoisture.h"
 
 // Impl for the core driver
 
 // Define the communication commands for the soil moisture sensor (from the original zio firmware)
+/**
+ * @brief Command to turn off the on-board LED
+ */
 #define kCommandLEDOff 0x00
+
+/**
+ * @brief Command to turn on the on-board LED
+ */
 #define kCommandLEDOn 0x01
+
+/**
+ * @brief Command to change the I2C address of the sensor
+ */
 #define kCommandChangeAddress 0x03
+
+/**
+ * @brief Command to get the moisture value from the sensor
+ */
 #define kCommandGetValue 0x05
+
+/**
+ * @brief Command indicating no new data is available
+ */
 #define kCommandNothingNew 0x99
+9
 //---------------------------------------------------------------------
 // Core object implementation
 //---------------------------------------------------------------------

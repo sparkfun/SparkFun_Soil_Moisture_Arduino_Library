@@ -1,12 +1,19 @@
-/*
- *---------------------------------------------------------------------------------
+/**
+ * @file sfeDevSoilMoisture.h
+ * @brief Header file for the soil moisture sensor class
  *
- * Copyright (c) 2025, SparkFun Electronics Inc.
+ * This file contains the class definition for the soil moisture sensor, including
+ * methods for initialization, reading moisture values, controlling the on-board LED,
+ * and setting the I2C address.
+ *
+ * @author SparkFun Electronics
+ * @date 2025
+ * @copyright Copyright (c) 2025, SparkFun Electronics Inc.
+ * @license MIT
  *
  * SPDX-License-Identifier: MIT
- *
- *---------------------------------------------------------------------------------
  */
+
 // Actual implementation of the soil moisture sensor - this is a platform "independent" implementation
 
 #pragma once
@@ -20,12 +27,27 @@
 #include <sfeTk/sfeTkII2C.h>
 #include <sfeTk/sfeTkISPI.h>
 
-// Default I2C address for the sensor
+/**
+ * @brief Default I2C address for the soil moisture sensor
+ *
+ * This macro defines the default I2C address (0x28) used by the soil moisture sensor.
+ */
 #define SFE_SOIL_MOISTURE_DEFAULT_I2C_ADDRESS 0x28
 
-// Max value for  the sensor value (10-bit ADC) 2^10  = 1024-1
+/**
+ * @brief Maximum value for the soil moisture sensor
+ *
+ * This macro defines the maximum value (1023) for the soil moisture sensor, 
+ * which corresponds to the highest reading from the 10-bit ADC.  2^10  = 1024-1
+ */
 #define SFE_SOIL_MOISTURE_MAX_VALUE 1023
 
+/**
+ * @brief Class representing the soil moisture sensor
+ *
+ * This class provides an interface to the soil moisture sensor, allowing for
+ * initialization, reading moisture values and controlling the on-board LED.
+ */
 class sfeDevSoilMoisture
 {
 
@@ -129,7 +151,12 @@ class sfeDevSoilMoisture
     uint8_t address(void);
 
   protected:
-    // The toolkit bus the sensor is connected to
+    /**
+     * @brief The toolkit bus the sensor is connected to
+     *
+     * This member variable holds a pointer to the bus interface (I2C or SPI) used
+     * for communication with the soil moisture sensor.
+     */
     sfeTkIBus *_theBus;
 
 }; // class sfeDevSoilMoisture

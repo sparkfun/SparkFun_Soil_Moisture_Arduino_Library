@@ -8,8 +8,7 @@
  *
  * @author SparkFun Electronics
  * @date 2025
- * @copyright Copyright (c) 2025, SparkFun Electronics Inc.
- * @license MIT
+ * @copyright Copyright (c) 2025, SparkFun Electronics Inc. This project is released under the MIT License.
  *
  * SPDX-License-Identifier: MIT
  */
@@ -37,7 +36,7 @@
 /**
  * @brief Maximum value for the soil moisture sensor
  *
- * This macro defines the maximum value (1023) for the soil moisture sensor, 
+ * This macro defines the maximum value (1023) for the soil moisture sensor,
  * which corresponds to the highest reading from the 10-bit ADC.  2^10  = 1024-1
  */
 #define SFE_SOIL_MOISTURE_MAX_VALUE 1023

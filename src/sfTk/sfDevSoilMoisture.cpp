@@ -1,5 +1,5 @@
 /**
- * @file sfeDevSoilMoisture.cpp
+ * @file sfDevSoilMoisture.cpp
  * @brief Implementation file for the soil moisture sensor class
  *
  * This file contains the implementation of the soil moisture sensor class, including
@@ -14,7 +14,7 @@
  */
 
 
-#include "sfeDevSoilMoisture.h"
+#include "sfDevSoilMoisture.h"
 
 // Impl for the core driver
 
@@ -48,34 +48,34 @@
 // Core object implementation
 //---------------------------------------------------------------------
 // start up the sensor
-sfeTkError_t sfeDevSoilMoisture::begin(sfeTkIBus *theBus)
+sfTkError_t sfDevSoilMoisture::begin(sfTkIBus *theBus)
 {
     // Nullptr check
     if (theBus == nullptr)
-        return kSTkErrBusNotInit;
+        return ksfTkErrBusNotInit;
 
     // Set bus pointer
     _theBus = theBus;
 
-    return kSTkErrOk;
+    return ksfTkErrOk;
 }
 
 //----------------------------------------------------------------------------------------
 // LED off command
-sfeTkError_t sfeDevSoilMoisture::LEDOff(void)
+sfTkError_t sfDevSoilMoisture::LEDOff(void)
 {
     if (_theBus == nullptr)
-        return kSTkErrBusNotInit;
+        return ksfTkErrBusNotInit;
 
     // Send the command to turn the LED off
     return _theBus->writeByte(kCommandLEDOff);
 }
 //----------------------------------------------------------------------------------------
 // LED on command
-sfeTkError_t sfeDevSoilMoisture::LEDOn(void)
+sfTkError_t sfDevSoilMoisture::LEDOn(void)
 {
     if (_theBus == nullptr)
-        return kSTkErrBusNotInit;
+        return ksfTkErrBusNotInit;
 
     // Send the command to turn the LED on
     return _theBus->writeByte(kCommandLEDOn);
@@ -83,13 +83,13 @@ sfeTkError_t sfeDevSoilMoisture::LEDOn(void)
 
 //----------------------------------------------------------------------------------------
 // Read the moisture value from the sensor - returns a resistance reading between 0 and 1023
-uint16_t sfeDevSoilMoisture::readMoistureValue(void)
+uint16_t sfDevSoilMoisture::readMoistureValue(void)
 {
     if (_theBus == nullptr)
         return 0;
 
     uint16_t value = 0;
-    if (_theBus->readRegisterWord(kCommandGetValue, value) != kSTkErrOk)
+    if (_theBus->readRegisterWord(kCommandGetValue, value) != ksfTkErrOk)
         return 0;
 
     return value;
@@ -97,53 +97,53 @@ uint16_t sfeDevSoilMoisture::readMoistureValue(void)
 
 //----------------------------------------------------------------------------------------
 // Returns the moisture ratio from the sensor (0 - 1.0)
-float sfeDevSoilMoisture::readMoistureRatio(void)
+float sfDevSoilMoisture::readMoistureRatio(void)
 {
     if (_theBus == nullptr)
         return 0.0;
 
-    return (((float)SFE_SOIL_MOISTURE_MAX_VALUE - (float)readMoistureValue()) / (float)SFE_SOIL_MOISTURE_MAX_VALUE);
+    return (((float)SF_SOIL_MOISTURE_MAX_VALUE - (float)readMoistureValue()) / (float)SF_SOIL_MOISTURE_MAX_VALUE);
 }
 
 //----------------------------------------------------------------------------------------
 // Returns the moisture percentage from the sensor (0 - 100%)
-float sfeDevSoilMoisture::readMoisturePercentage(void)
+float sfDevSoilMoisture::readMoisturePercentage(void)
 {
     return readMoistureRatio() * 100.0;
 }
 //----------------------------------------------------------------------------------------
 // Change the I2C address of the sensor
-sfeTkError_t sfeDevSoilMoisture::setI2CAddress(uint8_t newAddress)
+sfTkError_t sfDevSoilMoisture::setI2CAddress(uint8_t newAddress)
 {
     if (_theBus == nullptr)
-        return kSTkErrBusNotInit;
+        return ksfTkErrBusNotInit;
 
     // Validate the new address
     if (newAddress < 0x07 || newAddress > 0x78)
-        return kSTkErrFail;
+        return ksfTkErrFail;
 
     // If in I2C mode, is the address the same as the current address?
-    if (_theBus->type() == kBusTypeI2C && ((sfeTkII2C *)_theBus)->address() == newAddress)
-        return kSTkErrOk;
+    if (_theBus->type() == ksfTkBusTypeI2C && ((sfTkII2C *)_theBus)->address() == newAddress)
+        return ksfTkErrOk;
 
     // Send the command to change the address. NOTE: Because of how the sensor works,
     // the following will return an error (since the sensor side resets the bus)
     (void)_theBus->writeRegisterByte(kCommandChangeAddress, newAddress);
 
-    return kSTkErrOk;
+    return ksfTkErrOk;
 }
 //----------------------------------------------------------------------------------------
 // Return the address of the sensor bus. For I2C this is the address of the sensor, for
 // SPI this is the CS pin
-uint8_t sfeDevSoilMoisture::address(void)
+uint8_t sfDevSoilMoisture::address(void)
 {
     if (_theBus == nullptr)
         return 0;
 
-    if (_theBus->type() == kBusTypeSPI)
-        return ((sfeTkISPI *)_theBus)->cs();
-    else if (_theBus->type() == kBusTypeI2C)
-        return ((sfeTkII2C *)_theBus)->address();
+    if (_theBus->type() == ksfTkBusTypeSPI)
+        return ((sfTkISPI *)_theBus)->cs();
+    else if (_theBus->type() == ksfTkBusTypeI2C)
+        return ((sfTkII2C *)_theBus)->address();
 
     return 0;
 }

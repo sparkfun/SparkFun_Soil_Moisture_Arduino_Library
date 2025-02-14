@@ -1,5 +1,5 @@
 /**
- * @file sfeDevSoilMoisture.h
+ * @file sfDevSoilMoisture.h
  * @brief Header file for the soil moisture sensor class
  *
  * This file contains the class definition for the soil moisture sensor, including
@@ -20,18 +20,18 @@
 #include <stdint.h>
 
 // include the sparkfun toolkit headers
-#include <sfeTk/sfeToolkit.h>
+#include <sfTk/sfToolkit.h>
 
 // Bus interfaces
-#include <sfeTk/sfeTkII2C.h>
-#include <sfeTk/sfeTkISPI.h>
+#include <sfTk/sfTkII2C.h>
+#include <sfTk/sfTkISPI.h>
 
 /**
  * @brief Default I2C address for the soil moisture sensor
  *
  * This macro defines the default I2C address (0x28) used by the soil moisture sensor.
  */
-#define SFE_SOIL_MOISTURE_DEFAULT_I2C_ADDRESS 0x28
+#define SF_SOIL_MOISTURE_DEFAULT_I2C_ADDRESS 0x28
 
 /**
  * @brief Maximum value for the soil moisture sensor
@@ -39,7 +39,7 @@
  * This macro defines the maximum value (1023) for the soil moisture sensor,
  * which corresponds to the highest reading from the 10-bit ADC.  2^10  = 1024-1
  */
-#define SFE_SOIL_MOISTURE_MAX_VALUE 1023
+#define SF_SOIL_MOISTURE_MAX_VALUE 1023
 
 /**
  * @brief Class representing the soil moisture sensor
@@ -47,12 +47,12 @@
  * This class provides an interface to the soil moisture sensor, allowing for
  * initialization, reading moisture values and controlling the on-board LED.
  */
-class sfeDevSoilMoisture
+class sfDevSoilMoisture
 {
 
   public:
     // ctor
-    sfeDevSoilMoisture() : _theBus{nullptr}
+    sfDevSoilMoisture() : _theBus{nullptr}
     {
     }
 
@@ -63,36 +63,36 @@ class sfeDevSoilMoisture
      * communication with the sensor using the provided I2C bus interface.
      *
      * @param theBus Pointer to an I2C toolkit object. If nullptr, uses previously set bus
-     * @return kSTkErrOk if initialization succeeds
-     * @return kSTkErrBusNotInit if no valid bus interface is provided
+     * @return ksfTkErrOk if initialization succeeds
+     * @return ksfTkErrBusNotInit if no valid bus interface is provided
      */
-    sfeTkError_t begin(sfeTkIBus *theBus = nullptr);
+    sfTkError_t begin(sfTkIBus *theBus = nullptr);
 
     /**
      * @brief Turns off the on-board LED
      *
      * Disables the sensor's built-in LED
      *
-     * @return kSTkErrOk if LED was successfully turned off
-     * @return kSTkErrBusNotInit if no bus interface is configured
-     * @return kSTkErrFail if sensor doesn't respond or a communication error occurs
+     * @return ksfTkErrOk if LED was successfully turned off
+     * @return ksfTkErrBusNotInit if no bus interface is configured
+     * @return ksfTkErrFail if sensor doesn't respond or a communication error occurs
      *
      * @see LEDOn()
      */
-    sfeTkError_t LEDOff(void);
+    sfTkError_t LEDOff(void);
 
     /**
      * @brief Turns on the on-board LED
      *
      * Enables the sensor's built-in LED by sending the appropriate command
      *
-     * @return kSTkErrOk if LED was successfully turned on
-     * @return kSTkErrBusNotInit if no bus interface is configured
-     * @return kSTkErrFail if sensor doesn't respond or a communication error occurs
+     * @return ksfTkErrOk if LED was successfully turned on
+     * @return ksfTkErrBusNotInit if no bus interface is configured
+     * @return ksfTkErrFail if sensor doesn't respond or a communication error occurs
      *
      * @see LEDOff()
      */
-    sfeTkError_t LEDOn(void);
+    sfTkError_t LEDOn(void);
 
     /**
      * @brief Reads the moisture value from the sensor
@@ -134,10 +134,10 @@ class sfeDevSoilMoisture
      * for all future I2C communication with the sensor. This value is persistent
      *
      * @param newAddress The new I2C address to assign to the sensor
-     * @return kSTkErrOk if successful, otherwise an error code
+     * @return ksfTkErrOk if successful, otherwise an error code
      * @note If communicating via I2C, the provided address is used for future I2C communication
      */
-    sfeTkError_t setI2CAddress(uint8_t newAddress);
+    sfTkError_t setI2CAddress(uint8_t newAddress);
 
     /**
      * @brief Returns the current address of the sensor
@@ -156,6 +156,6 @@ class sfeDevSoilMoisture
      * This member variable holds a pointer to the bus interface (I2C or SPI) used
      * for communication with the soil moisture sensor.
      */
-    sfeTkIBus *_theBus;
+    sfTkIBus *_theBus;
 
-}; // class sfeDevSoilMoisture
+}; // class sfDevSoilMoisture

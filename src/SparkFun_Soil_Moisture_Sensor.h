@@ -32,7 +32,7 @@
 //
 //-----------------------------------------------------------------------------------------------
 // Define our Arduino Object - I2C version
-class SparkFunSoilMoistureSensorI2C : public sfDevSoilMoisture
+class SparkFunSoilMoistureSensor : public sfDevSoilMoisture
 {
   public:
     /**

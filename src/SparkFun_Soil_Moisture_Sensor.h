@@ -10,7 +10,7 @@
  * @author SparkFun Electronics
  * @date 2025
  * @copyright Copyright (c) 2025, SparkFun Electronics Inc. This project is released under the MIT License.
- * 
+ *
  * SPDX-License-Identifier: MIT
  */
 
@@ -20,9 +20,10 @@
 #pragma once
 
 // To make the Arduino machine happy, include the toolkit header before the core implementation for this device
+// clang-format off
 #include <SparkFun_Toolkit.h>
 #include "sfTk/sfDevSoilMoisture.h"
-
+// clang-format on
 
 // Note:
 // The core of the implementation for this device library is in the SparkFun Toolkit object sfDevSoilMoisture,

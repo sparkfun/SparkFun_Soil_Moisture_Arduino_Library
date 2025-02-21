@@ -9,10 +9,9 @@
  * @author SparkFun Electronics
  * @date 2025
  * @copyright Copyright (c) 2025, SparkFun Electronics Inc. This project is released under the MIT License.
- * 
+ *
  * SPDX-License-Identifier: MIT
  */
-
 
 #include "sfDevSoilMoisture.h"
 
@@ -22,27 +21,27 @@
 /**
  * @brief Command to turn off the on-board LED
  */
-#define kCommandLEDOff 0x00
+const uint8_t kCommandLEDOff = 0x00;
 
 /**
  * @brief Command to turn on the on-board LED
  */
-#define kCommandLEDOn 0x01
+const uint8_t kCommandLEDOn = 0x01;
 
 /**
  * @brief Command to change the I2C address of the sensor
  */
-#define kCommandChangeAddress 0x03
+const uint8_t kCommandChangeAddress = 0x03;
 
 /**
  * @brief Command to get the moisture value from the sensor
  */
-#define kCommandGetValue 0x05
+const uint8_t kCommandGetValue = 0x05;
 
 /**
  * @brief Command indicating no new data is available
  */
-#define kCommandNothingNew 0x99
+const uint8_t kCommandNothingNew = 0x99;
 
 //---------------------------------------------------------------------
 // Core object implementation
@@ -68,7 +67,7 @@ sfTkError_t sfDevSoilMoisture::LEDOff(void)
         return ksfTkErrBusNotInit;
 
     // Send the command to turn the LED off
-    return _theBus->writeByte(kCommandLEDOff);
+    return _theBus->writeData(kCommandLEDOff);
 }
 //----------------------------------------------------------------------------------------
 // LED on command
@@ -78,7 +77,7 @@ sfTkError_t sfDevSoilMoisture::LEDOn(void)
         return ksfTkErrBusNotInit;
 
     // Send the command to turn the LED on
-    return _theBus->writeByte(kCommandLEDOn);
+    return _theBus->writeData(kCommandLEDOn);
 }
 
 //----------------------------------------------------------------------------------------
@@ -89,7 +88,7 @@ uint16_t sfDevSoilMoisture::readMoistureValue(void)
         return 0;
 
     uint16_t value = 0;
-    if (_theBus->readRegisterWord(kCommandGetValue, value) != ksfTkErrOk)
+    if (_theBus->readRegister(kCommandGetValue, value) != ksfTkErrOk)
         return 0;
 
     return value;
@@ -128,7 +127,7 @@ sfTkError_t sfDevSoilMoisture::setI2CAddress(uint8_t newAddress)
 
     // Send the command to change the address. NOTE: Because of how the sensor works,
     // the following will return an error (since the sensor side resets the bus)
-    (void)_theBus->writeRegisterByte(kCommandChangeAddress, newAddress);
+    (void)_theBus->writeRegister(kCommandChangeAddress, newAddress);
 
     return ksfTkErrOk;
 }

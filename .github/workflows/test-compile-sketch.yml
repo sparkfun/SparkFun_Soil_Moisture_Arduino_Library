@@ -119,7 +119,7 @@ jobs:
         run: |
             arduino-cli config set library.enable_unsafe_install true
             arduino-cli version
-            arduino-cli lib install --git-url https://github.com/sparkfun/SparkFun_Toolkit.git#dc0f0ca
+            arduino-cli lib install "SparkFun Toolkit"@1.0.0
 
       - name: Compile Sketch
         run: arduino-cli compile --fqbn ${{ matrix.board.fqbn }} examples/Example_01_BasicReadings --library .

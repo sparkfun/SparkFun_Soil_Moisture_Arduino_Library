@@ -22,7 +22,7 @@
 #include "SparkFun_Soil_Moisture_Sensor.h" // CTRL+Click here to get the library: http://librarymanager/All#SparkFun_Soil_Moisture_Sensor
 #include <Wire.h>
 
-SparkFunSoilMoistureSensorI2C mySoilSensor; // Create an instance of the sensor class
+SparkFunSoilMoistureSensor mySoilSensor; // Create an instance of the sensor class
 
 // Define our alternate I2C address - the default address + 1
 #define ALTERNATE_I2C_ADDRESS SFE_SOIL_MOISTURE_DEFAULT_I2C_ADDRESS + 1

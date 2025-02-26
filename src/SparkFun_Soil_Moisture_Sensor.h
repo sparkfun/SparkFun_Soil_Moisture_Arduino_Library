@@ -10,7 +10,7 @@
  * @author SparkFun Electronics
  * @date 2025
  * @copyright Copyright (c) 2025, SparkFun Electronics Inc. This project is released under the MIT License.
- * 
+ *
  * SPDX-License-Identifier: MIT
  */
 
@@ -20,19 +20,20 @@
 #pragma once
 
 // To make the Arduino machine happy, include the toolkit header before the core implementation for this device
+// clang-format off
 #include <SparkFun_Toolkit.h>
-#include "sfeTk/sfeDevSoilMoisture.h"
-
+#include "sfTk/sfDevSoilMoisture.h"
+// clang-format on
 
 // Note:
-// The core of the implementation for this device library is in the SparkFun Toolkit object sfeDevSoilMoisture,
-// contained in the directory sfeTk. This object implements all functionality independent of the bus type, I2C or SPI.
+// The core of the implementation for this device library is in the SparkFun Toolkit object sfDevSoilMoisture,
+// contained in the directory sfTk. This object implements all functionality independent of the bus type, I2C or SPI.
 // The SparkFunSoilMoistureSensorI2C and SparkFunSoilMoistureSensorSPI classes below are the Arduino-specific,
 // bus-specific implementations that inherit from the core toolkit class.
 //
 //-----------------------------------------------------------------------------------------------
 // Define our Arduino Object - I2C version
-class SparkFunSoilMoistureSensorI2C : public sfeDevSoilMoisture
+class SparkFunSoilMoistureSensor : public sfDevSoilMoisture
 {
   public:
     /**
@@ -45,13 +46,13 @@ class SparkFunSoilMoistureSensorI2C : public sfeDevSoilMoisture
      * @param wirePort Wire port to use for I2C communication (default is Wire)
      * @return true if successful, false otherwise
      */
-    bool begin(const uint8_t address = SFE_SOIL_MOISTURE_DEFAULT_I2C_ADDRESS, TwoWire &wirePort = Wire)
+    bool begin(const uint8_t address = SF_SOIL_MOISTURE_DEFAULT_I2C_ADDRESS, TwoWire &wirePort = Wire)
     {
         // Setup Arduino I2C bus
         _theI2CBus.init(wirePort, address);
 
         // Begin the sensor and make sure it's connected.
-        return sfeDevSoilMoisture::begin(&_theI2CBus) == kSTkErrOk ? isConnected() : false;
+        return sfDevSoilMoisture::begin(&_theI2CBus) == ksfTkErrOk ? isConnected() : false;
     }
 
     /**
@@ -64,16 +65,16 @@ class SparkFunSoilMoistureSensorI2C : public sfeDevSoilMoisture
      */
     bool isConnected()
     {
-        return _theI2CBus.ping() == kSTkErrOk;
+        return _theI2CBus.ping() == ksfTkErrOk;
     }
 
   private:
-    sfeTkArdI2C _theI2CBus;
+    sfTkArdI2C _theI2CBus;
 };
 
 //-----------------------------------------------------------------------------------------------
 // Define our Arduino Object - SPI version
-class SparkFunSoilMoistureSensorSPI : public sfeDevSoilMoisture
+class SparkFunSoilMoistureSensorSPI : public sfDevSoilMoisture
 {
   public:
     /**
@@ -96,9 +97,9 @@ class SparkFunSoilMoistureSensorSPI : public sfeDevSoilMoisture
         _theSPIBus.init(spiPort, spiSettings, csPin, true);
 
         // Begin the sensor with the SPI bus connection
-        return (sfeDevSoilMoisture::begin(&_theSPIBus) == kSTkErrOk);
+        return (sfDevSoilMoisture::begin(&_theSPIBus) == ksfTkErrOk);
     }
 
   private:
-    sfeTkArdSPI _theSPIBus;
+    sfTkArdSPI _theSPIBus;
 };

@@ -26,7 +26,7 @@
 #include "SparkFun_Soil_Moisture_Sensor.h" // CTRL+Click here to get the library: http://librarymanager/All#SparkFun_Soil_Moisture_Sensor
 #include <Wire.h>
 
-SparkFunSoilMoistureSensorI2C mySoilSensor; // Create an instance of the sensor class
+SparkFunSoilMoistureSensor mySoilSensor; // Create an instance of the sensor class
 
 // The plan:
 //    The value of the sensor has the following range:

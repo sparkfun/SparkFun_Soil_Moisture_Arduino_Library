@@ -46,10 +46,10 @@ jobs:
 
           # Artemis / Apollo3
           # https://github.com/sparkfun/Arduino_Apollo3/blob/main/boards.txt
-          - fqbn: SparkFun:apollo3:sfe_artemis_atp
-        #     platforms: |
-            name: SparkFun:apollo3
-            source-url: https://raw.githubusercontent.com/sparkfun/Arduino_Apollo3/master/package_sparkfun_apollo3_index.json
+        #   - fqbn: SparkFun:apollo3:sfe_artemis_atp
+        # #     platforms: |
+        #     name: SparkFun:apollo3
+        #     source-url: https://raw.githubusercontent.com/sparkfun/Arduino_Apollo3/master/package_sparkfun_apollo3_index.json
 
           # ESP8266
           # https://github.com/esp8266/Arduino/blob/master/boards.txt

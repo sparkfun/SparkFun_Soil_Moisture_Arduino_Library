@@ -25,7 +25,7 @@
 SparkFunSoilMoistureSensor mySoilSensor; // Create an instance of the sensor class
 
 // Define our alternate I2C address - the default address + 1
-#define ALTERNATE_I2C_ADDRESS SFE_SOIL_MOISTURE_DEFAULT_I2C_ADDRESS + 1
+#define ALTERNATE_I2C_ADDRESS SF_SOIL_MOISTURE_DEFAULT_I2C_ADDRESS + 1
 
 // Some Dev boards have their QWIIC connector on Wire or Wire1
 // This #ifdef will help this sketch work across more products
@@ -61,26 +61,26 @@ void setup()
     if (mySoilSensor.begin() == false)
     {
         // Did the sensor get left at the alt address? Try the alt address
-        SparkFunSoilMoistureSensorI2C tmpSensor;
+        SparkFunSoilMoistureSensor tmpSensor;
         if (tmpSensor.begin(ALTERNATE_I2C_ADDRESS) == true)
         {
             Serial.println("Sensor found at the alternate address. Changing the address back to the default.");
-            tmpSensor.setI2CAddress(SFE_SOIL_MOISTURE_DEFAULT_I2C_ADDRESS);
+            tmpSensor.setI2CAddress(SF_SOIL_MOISTURE_DEFAULT_I2C_ADDRESS);
             delay(3000);
             if (mySoilSensor.begin() == false)
             {
-                Serial.println(
-                    "Error: Soil Moisture Sensor not detected at default I2C address. Verify the sensor is connected. Stopping.");
+                Serial.println("Error: Soil Moisture Sensor not detected at default I2C address. Verify the sensor is "
+                               "connected. Stopping.");
                 while (1)
                     ;
             }
         }
         else
         {
-        Serial.println(
-            "Soil Moisture Sensor not detected at default or alternative I2C address. Verify the sensor is connected. Stopping.");
-        while (1)
-            ;
+            Serial.println("Soil Moisture Sensor not detected at default or alternative I2C address. Verify the sensor "
+                           "is connected. Stopping.");
+            while (1)
+                ;
         }
     }
     Serial.println("Soil Moisture Sensor found!");
@@ -98,13 +98,13 @@ void setup()
     // Now the percent moisture
     Serial.print(mySoilSensor.readMoisturePercentage());
     Serial.println("% wet");
-    
+
     Serial.println();
 
     Serial.println("Changing the I2C address of the sensor to: 0x" + String(ALTERNATE_I2C_ADDRESS, HEX));
 
     // Change the I2C address
-    if (mySoilSensor.setI2CAddress(ALTERNATE_I2C_ADDRESS) != kSTkErrOk)
+    if (mySoilSensor.setI2CAddress(ALTERNATE_I2C_ADDRESS) != ksfTkErrOk)
     {
         Serial.println("ERROR: Unable to change the I2C address. Stopping.");
         while (1)
@@ -116,17 +116,17 @@ void setup()
     Serial.println();
 
     // try the sensor at the new address
-    SparkFunSoilMoistureSensorI2C mySoilSensorNewAddress; // Create an instance of the sensor class at new address
+    SparkFunSoilMoistureSensor mySoilSensorNewAddress; // Create an instance of the sensor class at new address
 
     if (mySoilSensorNewAddress.begin(ALTERNATE_I2C_ADDRESS) == false)
     {
-        Serial.println(
-            "Error: Soil Moisture Sensor not detected at new I2C address. Stopping.");
+        Serial.println("Error: Soil Moisture Sensor not detected at new I2C address. Stopping.");
         while (1)
             ;
     }
     Serial.println("Soil Moisture Sensor found at the new address!");
-    Serial.println();;
+    Serial.println();
+    ;
 
     // write out the current value
     Serial.print("Sensor Address: 0x");
@@ -140,12 +140,11 @@ void setup()
     // Now the percent moisture
     Serial.print(mySoilSensorNewAddress.readMoisturePercentage());
     Serial.println("% wet");
-    
 
-    Serial.println("Changing the I2C address of the sensor to: 0x" + String(SFE_SOIL_MOISTURE_DEFAULT_I2C_ADDRESS, HEX));
+    Serial.println("Changing the I2C address of the sensor to: 0x" + String(SF_SOIL_MOISTURE_DEFAULT_I2C_ADDRESS, HEX));
 
     // Change the I2C address
-    if (mySoilSensorNewAddress.setI2CAddress(SFE_SOIL_MOISTURE_DEFAULT_I2C_ADDRESS) != kSTkErrOk)
+    if (mySoilSensorNewAddress.setI2CAddress(SF_SOIL_MOISTURE_DEFAULT_I2C_ADDRESS) != ksfTkErrOk)
     {
         Serial.println("ERROR: Unable to change the I2C address. Stopping.");
         while (1)
@@ -157,8 +156,7 @@ void setup()
 
     Serial.println();
     Serial.println("Address changing complete. Entering loop...");
-    Serial.println();    
-
+    Serial.println();
 }
 
 //----------------------------------------------------------------------------------------
@@ -175,6 +173,6 @@ void loop()
     Serial.print(mySoilSensor.readMoisturePercentage());
     Serial.println("% wet");
 
-    // loop delay 
+    // loop delay
     delay(5000);
 }

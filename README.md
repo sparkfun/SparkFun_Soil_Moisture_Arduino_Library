@@ -84,7 +84,7 @@ To read the percent moist value, call the *readMoisturePercentage()* method:
 float percent = mySoilSensor.readMoisturePercentage();
 ~~~
 
-To read the moisture ration value (0 - 1.0), call the ```readMoistureRation()``` method:
+To read the moisture ration value (0 - 1.0), call the ```readMoistureRatio()``` method:
 
 ~~~cpp
 float wetRatio = mySoilSensor.readMoistureRatio();
